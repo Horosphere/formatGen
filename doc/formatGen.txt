@@ -1,0 +1,4 @@
+*formatGen.txt* Plugin for auto-generating code in C++
+
+Functions:
+
