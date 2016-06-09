@@ -18,6 +18,8 @@ if format == None:
     print(".formatGen format file not found")
     sys.exit(0)
 
+os.chdir(baseDir)
+
 if len(sys.argv) > 1: # User specified a list of files
     for fileName in sys.argv[1:]:
         with open(fileName, "r+") as file:
@@ -30,7 +32,7 @@ else: # Scan the directory recursively to find every header
     print("Recursively scanning working directory for headers")
     for root, subdirs, files in os.walk("./"):
         for fileName in files:
-            f = os.path.join(root, fileName)[2:]
+            f = os.path.join(root, fileName)[len("./"):]
             if f.endswith(('h', '.hh', '.hpp', '.hxx')):
                 print("Found header: " + f)
                 with open(f, "r+") as file:
