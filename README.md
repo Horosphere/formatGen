@@ -3,20 +3,29 @@ C++ Code auto-gen utility. Currently can be used to generate include guards.
 
 ## Installation
 
-You can use any vim plugin manager ([Pathogen](https://github.com/tpope/vim-pathogen), [Vundle](https://github.com/VundleVim/Vundle.vim), etc.) to manage formatGen.
+You can use any vim plugin manager ([Pathogen](
+https://github.com/tpope/vim-pathogen),
+[Vundle](https://github.com/VundleVim/Vundle.vim), etc.) to manage formatGen.
 
 ## Usage
 
-To use formatGen on any C++ project, create a file named `.formatGen` in a parent directory of all source files. The `.formatGen` file should contain the following:
+To use formatGen on any C++ project, create a file named `.formatGen` in a
+parent directory of all source files. The `.formatGen` file should contain the
+following:
 ```
 <format>
 <src-folder>
 ```
-The first line `<format>` is the style of the include guards. The following tokens will be replaced:
-`{DIR}, {Dir}, {dir}` -> upper, normal, lower case directory name, separated by underscores
-`{FNAME}, {FName}, {fname}` -> upper, normal, lower case file name. The file names must not contain dots.
+The first line `<format>` is the style of the include guards. The following
+tokens will be replaced:
+
+`{DIR}, {Dir}, {dir}` -> upper, normal, lower case directory name, separated
+by underscores
+
+`{FNAME}, {FName}, {fname}` -> upper, normal, lower case file name. The file
+names must not contain dots.
+
 `{EXT}, {Ext}, {ext}` -> file extension.
-```
 
 The second line is the common parent directory to all headers. For example, if your project is structured like this:
 ```
@@ -29,6 +38,20 @@ README.md
 --...
 ```
 Then `<src-folder>` should be `src`, with no slashes.
+
+Example:
+```
+_CPPTEST_{DIR}_{FName}_{ext}__
+src
+```
+When formatGen is applied to the file `src/core/Server.hpp`, it generates the
+following include guard:
+```
+#ifndef _CPPTEST_CORE_Server_hpp__
+#define _CPPTEST_CORE_Server_hpp__
+
+#endif // !_CPPTEST_CORE_Server_hpp__
+```
 
 ### Include guard generation
 
