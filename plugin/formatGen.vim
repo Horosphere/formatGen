@@ -50,7 +50,9 @@ pluginRoot = vim.eval('s:pluginRoot')
 sys.path.insert(0, os.path.join(pluginRoot, 'python'))
 import formatGen
 formatGen.init(vim.eval('s:python'))
-vim.command("command! -nargs=1 -complete=file FGInclueGuard " + vim.eval('s:python') + " formatGen.cppFormatIncludeGuardWrapper(<f-args>)")
+vim.command("command! -nargs=1 -complete=file FGInclueGuard " + vim.eval('s:python') + " formatGen.cppFormatIncludeGuard(<f-args>)")
+vim.command("command! -nargs=1 FGNamespace " + vim.eval('s:python') + " formatGen.cppNamespace(<f-args>)")
+
 EOF
 
 

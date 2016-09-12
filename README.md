@@ -1,5 +1,6 @@
 # formatGen
-C++ Code auto-gen utility. Currently can be used to generate include guards.
+C++ Code auto-gen utility. Currently can be used to generate include guards and
+namespaces.
 
 ## Installation
 
@@ -43,8 +44,8 @@ Example:
 _CPPTEST_{DIR}_{FName}_{ext}__
 src
 ```
-When formatGen is applied to the file `src/core/Server.hpp`, it generates the
-following include guard:
+When formatGen's include guard generator is applied to the file
+`src/core/Server.hpp`, it generates the following include guard:
 ```
 #ifndef _CPPTEST_CORE_Server_hpp__
 #define _CPPTEST_CORE_Server_hpp__
@@ -61,7 +62,7 @@ You can also run this script within Vim using `:FGIncludeGuard <path>`, where
 `<path>` is the path to your file. It is needed since there is no way to query
 the file path using Vim.
 
-### Rules
+#### Rules
 
 formatGen automatically detects existing include guards. If none exists, it
 will create its own. The include guard must qualify the following conditions to
@@ -72,6 +73,16 @@ be detected correctly.
 3. If there are preprocessor commands that look like an include guard, they
 will be identified as an include guard and problems can occur. This will be
 fixed in the future.
+
+### Namespace generation
+
+Using the vim command `:FGNamespace name` generates
+```
+namespace name
+{
+} // namespace name
+```
+On top of the cursor.
 
 ### Utilities
 

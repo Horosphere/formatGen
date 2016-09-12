@@ -1,8 +1,9 @@
 import os, sys, vim 
 
 import cpp.includeGuard
+import cpp.namespace
 
-def cppFormatIncludeGuardWrapper(rPath):
+def cppFormatIncludeGuard(rPath):
     baseDir = os.getcwd()
     systemRoot = os.path.abspath(os.sep)
     format = None
@@ -17,9 +18,15 @@ def cppFormatIncludeGuardWrapper(rPath):
         return
     cpp.includeGuard.format(vim.current.buffer, rPath, format)
 
+def cppNamespace(name):
+    cpp.namespace.namespace(vim.current, name)
+
 def init(commandPy):
     vim.command('function! s:FGIncludeGuard(rPath)\n' +
-                commandPy + ' cppFormatIncludeGuardWrapper(rPath)\n' +
+                commandPy + ' cppFormatIncludeGuard(rPath)\n' +
                 'endfunction')
     vim.command('command! -nargs=1 FGInclueGuard call s:FGInclueGuard(<f-args>)')
-
+    vim.command('function! s:FGNamespace(name)\n' +
+                commandPy + ' cppNamespace(name)\n' +
+                'endfunction')
+    vim.command('command! -nargs=1 FGNamespace call s:FGNamespace(<f-args>)')
